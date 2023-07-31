@@ -62,7 +62,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	bool timerActive[10];
 
 	//次のタイマーが始まる時間
-	const int NextStartTime = 30; //60フレーム想定でひとつ前の円が0.5秒動いたら次が始まる
+	int NextStartTime[10];
 	
 	//タイマーが止まる時間
 	const int MaxTime = 300; //60フレーム想定で5秒間動く
@@ -85,6 +85,18 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		timer[i] = 0;
 		timerActive[i] = false;
 	}
+
+	//細かく設定する
+	NextStartTime[0] = 10;
+	NextStartTime[1] = 10;
+	NextStartTime[2] = 10;
+	NextStartTime[3] = 30;
+	NextStartTime[4] = 30;
+	NextStartTime[5] = 30;
+	NextStartTime[6] = 50;
+	NextStartTime[7] = 10;
+	NextStartTime[8] = 90;
+	NextStartTime[9] = 30;
 
 	// ゲームループ
 	while (1)
@@ -122,7 +134,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			if (i != 0)
 			{
 				//ひとつ前の経過を見て、次のタイマーを動かす
-				if (timer[i - 1] > NextStartTime)
+				if (timer[i - 1] > NextStartTime[i])
 				{
 					timerActive[i] = true;
 				}
